@@ -12,6 +12,8 @@ struct ModalView: View {
     @State var transactionName = ""
     @State private var category: DropdownMenuOption? = nil
 
+    @Binding var isModalPresented: Bool
+
     var body: some View {
         ZStack {
             RoundedRectangle(cornerRadius: 30.0)
@@ -55,24 +57,25 @@ struct ModalView: View {
                                  options: DropdownMenuOption.testAllMonths)
                 }.zIndex(2)
                 SubmitButton().zIndex(1)
-            }
-        }.frame(width: 333, height: 415)
+                    .onTapGesture {
+                        self.isModalPresented.toggle()
+                    }
+            }.padding([.leading, .trailing, .top, .bottom])
+                .padding([.top], 10)
+        }.frame(width: 333, height: 200)
     }
 
     struct SubmitButton: View {
         var body: some View {
             ZStack {
                 RoundedRectangle(cornerRadius: 20 ).foregroundColor(Color("Success"))
-                    .frame(height: 60).shadow(radius: 10.0)
+                    .frame(height: 50).shadow(radius: 10.0)
 
                 Text("Готово").font(.title2).foregroundColor(.white).fontWeight(.semibold)
+                    .onTapGesture {
+                        
+                    }
             }
         }
-    }
-}
-
-struct ModalView_Previews: PreviewProvider {
-    static var previews: some View {
-        ModalView()
     }
 }

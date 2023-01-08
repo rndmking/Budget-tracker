@@ -10,33 +10,53 @@ import SwiftUI
 struct HomeView: View {
 
     @State private var blur = false
+    @State private var isModalPresented = false
     var body: some View {
-        VStack {
-            Header()
-            VStack{
+        ZStack {
+            VStack {
+                Header()
+                VStack{
+                    HStack {
+                        Text("Ваш баланс")
+                        Spacer()
+                    }
+                    HStack {
+                        Text("530₽").font(.system(size: 50.0, weight: .semibold))
+                        Spacer()
+                    }
+                }
+                HStack(spacing: 23.0){
+                    MoneyButton(color: Color("Success"), title: "💰")
+                        .onTapGesture {
+                            self.isModalPresented.toggle()
+                        }
+                    MoneyButton(color: Color("Failure"), title: "💸")
+                        .onTapGesture {
+                            self.isModalPresented.toggle()
+                        }
+                }
+                Divider()
                 HStack {
-                    Text("Ваш баланс")
+                    Text("История").font(.system(size: 28.0, weight: .bold))
                     Spacer()
                 }
-                HStack {
-                    Text("530₽").font(.system(size: 50.0, weight: .semibold))
-                    Spacer()
-                }
-            }
-            HStack(spacing: 23.0){
-                MoneyButton(color: Color("Success"), title: "💰")
-                MoneyButton(color: Color("Failure"), title: "💸")
-            }
-            Divider()
-            HStack {
-                Text("История").font(.system(size: 28.0, weight: .bold))
+                StoryCollection()
                 Spacer()
+            }.padding([.leading,.trailing], 40)
+            if self.isModalPresented {
+                VisualBlurEffect(uiVisualEffect: UIBlurEffect(style: .systemUltraThinMaterialDark))
+                                    .transition(.scale)
+                                    .ignoresSafeArea(.all)
+                                    .onTapGesture {
+                                        self.isModalPresented.toggle()
+                                    }
+                                ModalView(isModalPresented: self.$isModalPresented)
+                                    .transition(.scale)
+                                    .animation(.easeInOut)
+                            }
             }
-            StoryCollection()
-            Spacer()
-        }.padding([.leading,.trailing], 40)
+        }
     }
-
     @ViewBuilder
 
     private func Header() -> some View {
@@ -110,7 +130,6 @@ struct HomeView: View {
             }
         }
     }
-}
 
 struct HomeView_Previews: PreviewProvider {
     static var previews: some View {
