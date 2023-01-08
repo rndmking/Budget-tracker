@@ -9,10 +9,18 @@ import SwiftUI
 
 struct ModalView: View {
     @State var text = ""
-    @State var transactionName = ""
     @State private var category: DropdownMenuOption? = nil
-
+    @Binding var transactionName: String
+    @Binding var amount: Double?
     @Binding var isModalPresented: Bool
+    @Binding var stories: [Story]
+    private let formatter: NumberFormatter = {
+        let formatter = NumberFormatter()
+        formatter.numberStyle = .decimal
+        formatter.minimumFractionDigits = 0
+        formatter.maximumFractionDigits = 0
+        return formatter
+    }()
 
     var body: some View {
         ZStack {
@@ -24,9 +32,10 @@ struct ModalView: View {
                     Spacer()
                 }
                 ZStack {
-                    TextField("Введите сумму..", text: $text)
+                    TextField("Введите сумму..", value: $amount, formatter: formatter)
                         .frame(height: 50)
                         .padding(.leading)
+                        .keyboardType(.decimalPad)
                         .background {
                             RoundedRectangle(cornerRadius: 5)
                                 .foregroundColor(.gray)
@@ -58,7 +67,12 @@ struct ModalView: View {
                 }.zIndex(2)
                 SubmitButton().zIndex(1)
                     .onTapGesture {
+                        let newStory = Story(amount: self.amount, transactionName: self.transactionName, category: self.category)
+                        self.stories.insert(newStory, at: 0)
+                        self.amount = 0
+                        self.transactionName = ""
                         self.isModalPresented.toggle()
+                        
                     }
             }.padding([.leading, .trailing, .top, .bottom])
                 .padding([.top], 10)
@@ -72,9 +86,6 @@ struct ModalView: View {
                     .frame(height: 50).shadow(radius: 10.0)
 
                 Text("Готово").font(.title2).foregroundColor(.white).fontWeight(.semibold)
-                    .onTapGesture {
-                        
-                    }
             }
         }
     }

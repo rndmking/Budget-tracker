@@ -10,7 +10,11 @@ import SwiftUI
 struct HomeView: View {
 
     @State private var blur = false
-    @State private var isModalPresented = false
+    @State var isModalPresented = false
+    @State private var stories = [Story]()
+    @State private var transactionName = ""
+    @State private var amount: Double? = nil
+    
     var body: some View {
         ZStack {
             VStack {
@@ -40,7 +44,7 @@ struct HomeView: View {
                     Text("История").font(.system(size: 28.0, weight: .bold))
                     Spacer()
                 }
-                StoryCollection()
+                StoryCollection(stories: self.$stories)
                 Spacer()
             }.padding([.leading,.trailing], 40)
             if self.isModalPresented {
@@ -50,13 +54,14 @@ struct HomeView: View {
                                     .onTapGesture {
                                         self.isModalPresented.toggle()
                                     }
-                                ModalView(isModalPresented: self.$isModalPresented)
+                ModalView(transactionName: self.$transactionName, amount: self.$amount?, isModalPresented: self.$isModalPresented, stories: self.$stories)
                                     .transition(.scale)
                                     .animation(.easeInOut)
                             }
             }
         }
     }
+
     @ViewBuilder
 
     private func Header() -> some View {
@@ -90,19 +95,15 @@ struct HomeView: View {
     }
 
     struct StoryCollection: View {
+
+        @Binding var stories: [Story]
+
         var body: some View {
             VStack {
                 ScrollView(showsIndicators: false) {
-                    StoryCell(color: Color("Failure"), sum: "-250", action: "Купил хлеба", category: "Продукты")
-                    StoryCell(color: Color("Success"), sum: "+23250", action: "Зпха пришла", category: "Работа")
-                    StoryCell(color: Color("Failure"), sum: "-343", action: "Кофе пил", category: "Кафе")
-                    StoryCell(color: Color("Success"), sum: "+300", action: "Долг вернули", category: "Долг")
-                    StoryCell(color: Color("Failure"), sum: "-250", action: "Купил колбасу", category: "Продукты")
-                    StoryCell(color: Color("Success"), sum: "+2250", action: "Подарок", category: "Подарок")
-                    StoryCell(color: Color("Failure"), sum: "-150", action: "Скатнулся на такси", category: "Путешествия")
-                    StoryCell(color: Color("Failure"), sum: "+10", action: "Нашел чирик", category: "Подарок")
-                    StoryCell(color: Color("Failure"), sum: "-50", action: "Уличному музыканту отдал", category: "Другое")
-                    StoryCell(color: Color("Failure"), sum: "-2000", action: "Купил носки", category: "Одежда")
+                    ForEach(stories) { story in
+                        StoryCell(color: Color("Failure"), amount: story.amount!, action: story.transactionName, category: story.category)
+                    }
                 }
             }
         }
@@ -110,9 +111,9 @@ struct HomeView: View {
 
     struct StoryCell: View {
         var color: Color
-        var sum: String
+        var amount: Double
         var action: String
-        var category: String
+        var category: DropdownMenuOption?
         var body: some View {
         VStack {
             ZStack {
@@ -120,16 +121,23 @@ struct HomeView: View {
                 HStack {
                     VStack(alignment: .leading, spacing: 5) {
                         Text(action).font(.system(size: 16.0, weight: .semibold))
-                        Text(category).font(.system(size: 14.0, weight: .regular))
+                        Text(category!.option).font(.system(size: 14.0, weight: .regular))
                     }.padding(.trailing)
                     Spacer()
-                    Text(sum + "₽").font(.system(size: 18.0, weight: .bold)).foregroundColor(color)
+                    Text(String(amount) + "₽").font(.system(size: 18.0, weight: .bold)).foregroundColor(color)
                 }
             }.frame(height: 61)
             Divider()
             }
         }
     }
+
+struct Story: Identifiable, Hashable {
+    let id = UUID().uuidString
+    let amount: Double?
+    let transactionName: String
+    let category: DropdownMenuOption?
+}
 
 struct HomeView_Previews: PreviewProvider {
     static var previews: some View {
