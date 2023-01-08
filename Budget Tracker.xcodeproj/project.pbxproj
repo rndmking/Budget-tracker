@@ -11,6 +11,14 @@
 		793611C6296A2FBD004376CE /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 793611C5296A2FBD004376CE /* ContentView.swift */; };
 		793611C8296A2FBF004376CE /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 793611C7296A2FBF004376CE /* Assets.xcassets */; };
 		793611CB296A2FBF004376CE /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 793611CA296A2FBF004376CE /* Preview Assets.xcassets */; };
+		793611D2296A30A4004376CE /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 793611D1296A30A4004376CE /* HomeView.swift */; };
+		793611D4296A4942004376CE /* VisualBlurEffect.swift in Sources */ = {isa = PBXBuildFile; fileRef = 793611D3296A4942004376CE /* VisualBlurEffect.swift */; };
+		793611D6296A4A09004376CE /* ModalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 793611D5296A4A09004376CE /* ModalView.swift */; };
+		793611D8296A4E7B004376CE /* DropdownMenuOption.swift in Sources */ = {isa = PBXBuildFile; fileRef = 793611D7296A4E7B004376CE /* DropdownMenuOption.swift */; };
+		793611DA296A4F67004376CE /* DropdownMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 793611D9296A4F67004376CE /* DropdownMenu.swift */; };
+		793611DC296A5268004376CE /* DropdownMenuList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 793611DB296A5268004376CE /* DropdownMenuList.swift */; };
+		793611DE296A5367004376CE /* DropdownMenuListRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 793611DD296A5367004376CE /* DropdownMenuListRow.swift */; };
+		793611E0296A56B7004376CE /* DropdownMenuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 793611DF296A56B7004376CE /* DropdownMenuView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -19,6 +27,14 @@
 		793611C5296A2FBD004376CE /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		793611C7296A2FBF004376CE /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		793611CA296A2FBF004376CE /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		793611D1296A30A4004376CE /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
+		793611D3296A4942004376CE /* VisualBlurEffect.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VisualBlurEffect.swift; sourceTree = "<group>"; };
+		793611D5296A4A09004376CE /* ModalView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModalView.swift; sourceTree = "<group>"; };
+		793611D7296A4E7B004376CE /* DropdownMenuOption.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DropdownMenuOption.swift; sourceTree = "<group>"; };
+		793611D9296A4F67004376CE /* DropdownMenu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DropdownMenu.swift; sourceTree = "<group>"; };
+		793611DB296A5268004376CE /* DropdownMenuList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DropdownMenuList.swift; sourceTree = "<group>"; };
+		793611DD296A5367004376CE /* DropdownMenuListRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DropdownMenuListRow.swift; sourceTree = "<group>"; };
+		793611DF296A56B7004376CE /* DropdownMenuView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DropdownMenuView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -54,6 +70,10 @@
 				793611C3296A2FBD004376CE /* Budget_TrackerApp.swift */,
 				793611C5296A2FBD004376CE /* ContentView.swift */,
 				793611C7296A2FBF004376CE /* Assets.xcassets */,
+				793611D1296A30A4004376CE /* HomeView.swift */,
+				793611D3296A4942004376CE /* VisualBlurEffect.swift */,
+				793611D5296A4A09004376CE /* ModalView.swift */,
+				793611E1296A5A0C004376CE /* DropdownMenu */,
 				793611C9296A2FBF004376CE /* Preview Content */,
 			);
 			path = "Budget Tracker";
@@ -65,6 +85,18 @@
 				793611CA296A2FBF004376CE /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		793611E1296A5A0C004376CE /* DropdownMenu */ = {
+			isa = PBXGroup;
+			children = (
+				793611D9296A4F67004376CE /* DropdownMenu.swift */,
+				793611DF296A56B7004376CE /* DropdownMenuView.swift */,
+				793611D7296A4E7B004376CE /* DropdownMenuOption.swift */,
+				793611DB296A5268004376CE /* DropdownMenuList.swift */,
+				793611DD296A5367004376CE /* DropdownMenuListRow.swift */,
+			);
+			path = DropdownMenu;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -137,8 +169,16 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				793611E0296A56B7004376CE /* DropdownMenuView.swift in Sources */,
+				793611D8296A4E7B004376CE /* DropdownMenuOption.swift in Sources */,
+				793611D2296A30A4004376CE /* HomeView.swift in Sources */,
 				793611C6296A2FBD004376CE /* ContentView.swift in Sources */,
+				793611DE296A5367004376CE /* DropdownMenuListRow.swift in Sources */,
 				793611C4296A2FBD004376CE /* Budget_TrackerApp.swift in Sources */,
+				793611D4296A4942004376CE /* VisualBlurEffect.swift in Sources */,
+				793611D6296A4A09004376CE /* ModalView.swift in Sources */,
+				793611DA296A4F67004376CE /* DropdownMenu.swift in Sources */,
+				793611DC296A5268004376CE /* DropdownMenuList.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
