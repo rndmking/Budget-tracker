@@ -13,7 +13,8 @@ struct HomeView: View {
     @State var isModalPresented = false
     @State private var stories = [Story]()
     @State private var transactionName = ""
-    @State private var amount: Double? = nil
+    @State private var amount: Int = 0
+    @State private var balance: Int = 100000
     
     var body: some View {
         ZStack {
@@ -25,7 +26,7 @@ struct HomeView: View {
                         Spacer()
                     }
                     HStack {
-                        Text("530₽").font(.system(size: 50.0, weight: .semibold))
+                        Text(String(balance)+"₽").font(.system(size: 50.0, weight: .semibold))
                         Spacer()
                     }
                 }
@@ -54,7 +55,7 @@ struct HomeView: View {
                                     .onTapGesture {
                                         self.isModalPresented.toggle()
                                     }
-                ModalView(transactionName: self.$transactionName, amount: self.$amount?, isModalPresented: self.$isModalPresented, stories: self.$stories)
+                ModalView(transactionName: self.$transactionName, amount: self.$amount, isModalPresented: self.$isModalPresented, balance: self.$balance, stories: self.$stories)
                                     .transition(.scale)
                                     .animation(.easeInOut)
                             }
@@ -102,7 +103,7 @@ struct HomeView: View {
             VStack {
                 ScrollView(showsIndicators: false) {
                     ForEach(stories) { story in
-                        StoryCell(color: Color("Failure"), amount: story.amount!, action: story.transactionName, category: story.category)
+                        StoryCell(color: Color("Failure"), amount: story.amount, action: story.transactionName, category: story.category)
                     }
                 }
             }
@@ -111,13 +112,14 @@ struct HomeView: View {
 
     struct StoryCell: View {
         var color: Color
-        var amount: Double
+        var amount: Int
         var action: String
         var category: DropdownMenuOption?
         var body: some View {
         VStack {
             ZStack {
-                Rectangle().foregroundColor(.white)
+                Rectangle()
+                    .foregroundColor(.white)
                 HStack {
                     VStack(alignment: .leading, spacing: 5) {
                         Text(action).font(.system(size: 16.0, weight: .semibold))
@@ -134,7 +136,7 @@ struct HomeView: View {
 
 struct Story: Identifiable, Hashable {
     let id = UUID().uuidString
-    let amount: Double?
+    let amount: Int
     let transactionName: String
     let category: DropdownMenuOption?
 }

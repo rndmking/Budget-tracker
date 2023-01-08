@@ -11,8 +11,9 @@ struct ModalView: View {
     @State var text = ""
     @State private var category: DropdownMenuOption? = nil
     @Binding var transactionName: String
-    @Binding var amount: Double?
+    @Binding var amount: Int
     @Binding var isModalPresented: Bool
+    @Binding var balance: Int
     @Binding var stories: [Story]
     private let formatter: NumberFormatter = {
         let formatter = NumberFormatter()
@@ -67,8 +68,9 @@ struct ModalView: View {
                 }.zIndex(2)
                 SubmitButton().zIndex(1)
                     .onTapGesture {
-                        let newStory = Story(amount: self.amount, transactionName: self.transactionName, category: self.category)
+                        let newStory = Story(amount: -self.amount, transactionName: self.transactionName, category: self.category)
                         self.stories.insert(newStory, at: 0)
+                        self.balance -= amount
                         self.amount = 0
                         self.transactionName = ""
                         self.isModalPresented.toggle()
