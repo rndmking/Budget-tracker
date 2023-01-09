@@ -3,7 +3,7 @@
 //  Budget Tracker
 //
 //  Created by Роберт Гадеев on 08.01.2023.
-//
+//  Hello world
 
 import SwiftUI
 
