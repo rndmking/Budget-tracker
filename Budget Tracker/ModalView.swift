@@ -20,6 +20,7 @@ struct ModalView: View {
         formatter.numberStyle = .decimal
         formatter.minimumFractionDigits = 0
         formatter.maximumFractionDigits = 0
+        formatter.zeroSymbol = ""
         return formatter
     }()
 
